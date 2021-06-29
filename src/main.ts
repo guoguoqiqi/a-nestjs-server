@@ -2,13 +2,14 @@ import * as express from 'express';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { AllExceptionsFilter } from './filter/any-exception.filter';
 
 import { logger } from './middleware/logger.middleware'
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
-import { AllExceptionsFilter } from './filter/any-exception.filter';
 
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import { RedisIoAdapter } from './logical/gateway/redis.adapter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -43,5 +44,7 @@ async function bootstrap() {
   await app.listen(3322, () => {
     console.log('server listen on 3322');
   });
+  app.useWebSocketAdapter(new RedisIoAdapter(app));
+
 }
 bootstrap();

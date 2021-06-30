@@ -18,7 +18,6 @@ export class ChatService {
       SELECT * from chat_record limit ${(pageIndex - 1) * pageSize},${pageSize}; 
     `;
 
-    console.log(insertChatRecord, 'insertChatRecord')
     try {
       const chatRecordList = await sequelize.query(insertChatRecord, {
         type: Sequelize.QueryTypes.SELECT, // 查询方式

@@ -42,7 +42,7 @@ async function bootstrap() {
   SwaggerModule.setup('api-doc', app, document);
 
   await app.listen(3322, () => {
-    console.log('server listen on 3322');
+    console.log(`server listen on 3322`);
   });
   app.useWebSocketAdapter(new RedisIoAdapter(app));
 

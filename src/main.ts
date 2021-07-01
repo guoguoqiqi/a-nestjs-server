@@ -20,7 +20,12 @@ async function bootstrap() {
   // 全局路由前缀
   app.setGlobalPrefix('nest-demo-01');
   // 允许跨域
-  app.enableCors();
+  app.enableCors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+  });
 
   // 监听所有的请求路由，并打印日志
   app.use(logger);

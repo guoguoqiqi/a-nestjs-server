@@ -1,4 +1,3 @@
-// src/database/sequelize.ts
 import { Sequelize } from 'sequelize-typescript';
 import db from '../../config/db';
 

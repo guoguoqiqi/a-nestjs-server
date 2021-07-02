@@ -50,7 +50,7 @@ export class UserController {
     }
   }
 
-  @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
+  // @UseGuards(AuthGuard('jwt')) // 使用 'JWT' 进行验证
   @UsePipes(new ValidationPipe()) // 使用管道验证
   @Post('register')
   async register(@Body() body: RegisterInfoDTO) {

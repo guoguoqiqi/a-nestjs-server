@@ -18,7 +18,10 @@ const user = `CREATE TABLE admin_user (
 const chat = `CREATE TABLE chat_record (
   record_id smallint(6) NOT NULL AUTO_INCREMENT COMMENT '记录ID',
   account_name varchar(24) NOT NULL COMMENT '用户账号',
+  real_name varchar(24) NOT NULL COMMENT '用户名称',
   message_value varchar(225) NOT NULL COMMENT '发送内容',
+  message_origin varchar(24) NOT NULL COMMENT '消息来源',
+  message_type varchar(24) NOT NULL COMMENT '消息类型',
   create_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   PRIMARY KEY (record_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='聊天记录表';`

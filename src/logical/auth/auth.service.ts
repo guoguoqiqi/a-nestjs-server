@@ -55,6 +55,13 @@ export class AuthService {
         code: 200,
         data: {
           token,
+          user2: user,
+          user: {
+            realName: user.realName,
+            role: user.role,
+            username: user.username,
+            mobile: user.mobile
+          }
         },
         msg: `登录成功`,
       };

@@ -24,7 +24,6 @@ export class ChatService {
         raw: false, // 是否使用数组组装的方式展示结果
         logging: true, // 是否将 SQL 语句打印到控制台
       });
-      console.log(chatRecordList, 'chatRecordList')
       return {
         code: 200,
         row: chatRecordList,
@@ -43,13 +42,13 @@ export class ChatService {
    * @param requestBody 请求体
    */
   async sendMessage(requestBody: ChatRecordDto): Promise<any> {
-    const { accountName, messageValue } = requestBody;
-    const createTime = Moment().format("YYYY-MM-DD HH:mm:ss");
+    const { account_name, real_name, message_value, message_origin, message_type } = requestBody;
+    const create_time = Moment().format("YYYY-MM-DD HH:mm:ss");
     const insertChatRecord = `
       INSERT INTO chat_record
-        (account_name, message_value, create_time)
+        (account_name, real_name, message_value, message_origin, message_type, create_time)
       VALUES
-        ('${accountName}', '${messageValue}', '${createTime}')
+        ('${account_name}', '${real_name}','${message_value}','${message_origin}','${message_type}', '${create_time}')
     `;
     try {
       await sequelize.query(insertChatRecord, { logging: false });

@@ -4,7 +4,7 @@ import {
   WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
-import { Server } from 'ws';
+import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 
 
@@ -16,7 +16,7 @@ export class MessageGateway {
   private logger: Logger = new Logger('MessageGateway');
 
   @SubscribeMessage('enterRoom')
-  enterRoom(client, data: unknown): WsResponse<unknown> {
+  enterRoom(client: Socket, data: unknown): WsResponse<unknown> {
     this.logger.log(data)
     // 通知对应客户端 events 事件
     client.emit('enteredRoom', data);
@@ -26,7 +26,7 @@ export class MessageGateway {
   }
 
   @SubscribeMessage('leaveRoom')
-  leaveRoom(client, data: unknown): WsResponse<unknown> {
+  leaveRoom(client: Socket, data: unknown): WsResponse<unknown> {
     this.logger.log(data)
     client.emit('leavedRoom', data);
     client.broadcast.emit('leavedRoom', data);
@@ -34,7 +34,7 @@ export class MessageGateway {
   }
 
   @SubscribeMessage('sendMessage')
-  sendMessage(client, data: unknown): WsResponse<unknown> {
+  sendMessage(client: Socket, data: unknown): WsResponse<unknown> {
     this.logger.log(data)
     client.emit('sendMessage', data);
     client.broadcast.emit('sendMessage', data);

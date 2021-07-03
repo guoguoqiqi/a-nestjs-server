@@ -1,3 +1,5 @@
+const database = `CREATE DATABASE nest_demo_01 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
+
 const user = `CREATE TABLE admin_user (
   user_id smallint(6) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
   account_name varchar(24) NOT NULL COMMENT '用户账号',

@@ -46,8 +46,8 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-doc', app, document);
 
-  await app.listen(3322, () => {
-    console.log(`server listen on 3322`);
+  await app.listen(18303, () => {
+    console.log(`server listen on 18303`);
   });
   app.useWebSocketAdapter(new RedisIoAdapter(app));
 

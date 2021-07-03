@@ -10,7 +10,7 @@ import { UserController } from './logical/user/user.controller';
     UserModule,
     AuthModule,
     ChatModule,
-    MessageModule
+    MessageModule,
   ],
   providers: [],
   controllers: [UserController],

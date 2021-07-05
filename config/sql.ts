@@ -1,4 +1,5 @@
-const database = `CREATE DATABASE nest_demo_01 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
+const databaseUtf8 = `CREATE DATABASE nest_demo_01 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;`
+const databaseUtf8mb4 = `CREATE DATABASE nest_demo_02 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
 
 const user = `CREATE TABLE admin_user (
   user_id smallint(6) NOT NULL AUTO_INCREMENT COMMENT '用户ID',

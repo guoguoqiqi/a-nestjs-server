@@ -1,4 +1,3 @@
-// config/db.ts
 const productConfig = {
   mysql: {
     port: 3306,
@@ -7,6 +6,7 @@ const productConfig = {
     password: 'root',
     database: 'nest_demo_01', // 库名
     connectionLimit: 10, // 连接限制
+    charset: 'utf8mb4',
   },
 };
 
@@ -18,6 +18,7 @@ const localConfig = {
     password: 'root',
     database: 'nest_demo_01', // 库名
     connectionLimit: 10, // 连接限制
+    charset: 'utf8mb4',
   },
 };
 

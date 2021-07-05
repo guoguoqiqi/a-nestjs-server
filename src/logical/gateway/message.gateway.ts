@@ -1,4 +1,7 @@
 import {
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
@@ -7,13 +10,59 @@ import {
 import { Server, Socket } from 'socket.io';
 import { Logger } from '@nestjs/common';
 
+export enum MessageOrigin {
+  SYSTEM_MSG = 'systemMsg',
+  USER_MSG = 'userMsg'
+}
+
+export enum MessageType {
+  TEXT_MSG = 'textMsg',
+  SMILE_MSG = 'smileMsg',
+  IMAGE_MSG = 'imageMsg',
+  VIDEO_MSG = 'videoMsg'
+}
+
+export interface SendMessageBody {
+  account_name: string
+  real_name: string
+  message_origin: string
+  message_type: string
+  message_value: any
+}
+
 
 @WebSocketGateway({ namespace: '/chat' })
-export class MessageGateway {
+export class MessageGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
   @WebSocketServer() server: Server;
 
   private logger: Logger = new Logger('MessageGateway');
+  private onlineNumber: number = 0;
+
+  afterInit(server: Server) {
+    this.logger.log('Init');
+  }
+
+  handleConnection(client: Socket, ...args: any[]) {
+    this.onlineNumber++
+    client.emit('onlineNumberChange', {
+      message_origin: MessageOrigin.SYSTEM_MSG,
+      message_type: MessageType.TEXT_MSG,
+      message_value: JSON.stringify({ onlineNumber: this.onlineNumber })
+    });
+    this.logger.log(`Client connected: ${client.id}`);
+  }
+
+  handleDisconnect(client: Socket) {
+    this.onlineNumber--
+    client.emit('onlineNumberChange', {
+      message_origin: MessageOrigin.SYSTEM_MSG,
+      message_type: MessageType.TEXT_MSG,
+      message_value: JSON.stringify({ onlineNumber: this.onlineNumber })
+    });
+    this.logger.log(`Client disconnected: ${client.id}`);
+  }
+
 
   @SubscribeMessage('enterRoom')
   enterRoom(client: Socket, data: unknown): WsResponse<unknown> {

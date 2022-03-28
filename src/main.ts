@@ -4,7 +4,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AllExceptionsFilter } from './filter/any-exception.filter';
 
-import { logger } from './middleware/logger.middleware'
+import { logger } from './middleware/logger.middleware';
 import { TransformInterceptor } from './interceptor/transform.interceptor';
 import { HttpExceptionFilter } from './filter/http-exception.filter';
 
@@ -21,10 +21,10 @@ async function bootstrap() {
   app.setGlobalPrefix('nest-demo-01');
   // 允许跨域
   app.enableCors({
-    "origin": "*",
-    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-    "preflightContinue": false,
-    "optionsSuccessStatus": 204
+    origin: '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
   });
 
   // 监听所有的请求路由，并打印日志
@@ -46,10 +46,9 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api-doc', app, document);
 
-  await app.listen(18303, () => {
-    console.log(`server listen on 18303`);
+  await app.listen(3029, () => {
+    console.log(`server listen on 3029`);
   });
   app.useWebSocketAdapter(new RedisIoAdapter(app));
-
 }
 bootstrap();

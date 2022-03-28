@@ -2,7 +2,7 @@ const productConfig = {
   mysql: {
     port: 3306,
     host: '127.0.0.1',
-    user: 'root',
+    user: 'root1',
     password: 'root',
     database: 'nest_demo_01', // 库名
     connectionLimit: 10, // 连接限制
@@ -14,7 +14,7 @@ const localConfig = {
   mysql: {
     port: 3306,
     host: '127.0.0.1',
-    user: 'root',
+    user: 'root1',
     password: 'root',
     database: 'nest_demo_01', // 库名
     connectionLimit: 10, // 连接限制
